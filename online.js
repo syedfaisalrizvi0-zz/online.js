@@ -46,23 +46,23 @@ function online(options,callback1 =function(){},callback2=function(){}){
   }
   
   @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
+    from { opacity: 0;} 
+    to { opacity: 1;}
   }
   
   @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from { opacity: 0;}
+    to { opacity: 1;}
   }
   
   @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
+    from { opacity: 1;} 
+    to { opacity: 0;}
   }
   
   @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+    from { opacity: 1;}
+    to { opacity: 0;}
   }
   @keyframes rotation {
     from {
@@ -108,9 +108,21 @@ function online(options,callback1 =function(){},callback2=function(){}){
   msgCheck = options[item];
  }
  else if(item == 'position'){
-   if(options[item] == 'top-right'){
+   if(options[item] == 'top-left'){
      notificationHtml.style.left = '8%';
-     notificationHtml.style.top = '5%'
+     notificationHtml.style.top = '5%';
+   }
+   else if(options[item] == 'top-right'){
+    notificationHtml.style.left = '90%';
+    notificationHtml.style.top = '5%';
+   }
+   else if(options[item] == 'bottom-right'){
+    notificationHtml.style.left = '90%';
+    notificationHtml.style.top = '89%';
+   }
+   else if(options[item] == 'bottom-right'){
+    notificationHtml.style.left = '8%';
+    notificationHtml.style.top = '89%';
    }
    else{
       // 
@@ -148,3 +160,4 @@ function online(options,callback1 =function(){},callback2=function(){}){
 function hasClass(element, className) {
     return (' ' + element.className + ' ').indexOf(' ' + className+ ' ') > -1;
 }
+
