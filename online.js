@@ -1,9 +1,16 @@
-var spinnersrc = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KPHBhdGggZmlsbD0iIzQ0NDQ0NCIgZD0iTTkuOSAwLjJsLTAuMiAxYzMgMC44IDUuMyAzLjUgNS4zIDYuOCAwIDMuOS0zLjEgNy03IDdzLTctMy4xLTctN2MwLTMuMyAyLjMtNiA1LjMtNi44bC0wLjItMWMtMy41IDAuOS02LjEgNC4xLTYuMSA3LjggMCA0LjQgMy42IDggOCA4czgtMy42IDgtOGMwLTMuNy0yLjYtNi45LTYuMS03Ljh6Ij48L3BhdGg+Cjwvc3ZnPgo=';
+var spinnersrc;
+var backgroundColorOff ='red';
+var backgroundColorOnn ='green';
+var msgOff  = 'Internet is not Connected';
+var msgOnn  = 'Connected';
+var msgCheck = 'Checking';
+var position  = 'top-right';
+var defSrc = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0ZWQgYnkgSWNvTW9vbi5pbyAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KPHBhdGggZmlsbD0iIzQ0NDQ0NCIgZD0iTTkuOSAwLjJsLTAuMiAxYzMgMC44IDUuMyAzLjUgNS4zIDYuOCAwIDMuOS0zLjEgNy03IDdzLTctMy4xLTctN2MwLTMuMyAyLjMtNiA1LjMtNi44bC0wLjItMWMtMy41IDAuOS02LjEgNC4xLTYuMSA3LjggMCA0LjQgMy42IDggOCA4czgtMy42IDgtOGMwLTMuNy0yLjYtNi45LTYuMS03Ljh6Ij48L3BhdGg+Cjwvc3ZnPgo=';
 var verifiedsrc = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfjCh4IDQ76d/lzAAACrklEQVRo3u2ZMWsUQRSAvztNzmCCInbJJaKJghERC7FRwSCioL2IhQgWNlp4LPgLbEyhBjGgjbUWYqsRzC9QIZJ4iXdnFPVSGEwgGDMWt7dZ93ZmZy/zzuZmmtudN+/7dvftsjcL7fafWyayvZkeh9lXWLYPPsw4ZdZQTvsSb7jJjiR4jnHn6HCvct6E72RCEF7rqxzXC9wXxysUrwPeln8rb5hVP+Q7l5yWIHRxlrd+9l8AZLjNb+Y5sR406gcs0OcUXm/dTKNQTAAZ7gXFOVIPeO/vuiqCBziF4gVdIXxN4WRt+Ke/Iy8mkOUxHRF8SKG+uU1MACDDWOxT4lhrBOLxCsVUKwT0eMU3eQETfo0r0gKNpRfGXwdZAQu8pIAVXk7AEi8lYI1PFrhGiVfsSYkfs8UnCRT80QqDEkefJFAITa1YnoWUeJNAITK9bKGQGq8XuBWT4hO7EvAprr1Z4IjmJXWOAbd4ncAFbapZjUKTeJ1ADzPadEX6m8IfpTdNDeT5qE0ZrQVT6Sk8AIZZiC9i/V2Qp2ilYIPvo4RKKwD9zGoTz/gn1Aa/kylUMwJmhWl6rfAw6W83IQC7KWsBH3hkKL0bQY7qRgRggDnDUSYdvQMBGOTzBvAOBGAolYIXme1AAIaYbxLvSAD2Wil4MTMdCdgoeLHznAnAPr6kxjsVMCl42jlOBeAgP4yPHXGBOAXPGO9cIKrgJUQLCIQVkvBCAnCASYpctogUErBvBoGsINaqtQVaI6BMAov+L7ki3BSsQC82Dmap+L/OiAmMkANgiWrc8B3/FpFarF7/j/UsPmB/sFxf5qLjC7GVc8FiuOK0LuxuyhfO5vpzvWcnL8Xx79huOlU5HvBHEP/U5tIe4iEl59/OvvIk/HmmsUU/XHbQ7bAIl1lxmK3dZNpf9QIiD0zm8vEAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMTAtMzBUMDg6MTM6MTQrMDA6MDCqsO7uAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTEwLTMwVDA4OjEzOjE0KzAwOjAw2+1WUgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAASUVORK5CYII=';
-function online(callback1 =function(){},callback2=function(){}){
+spinnersrc = defSrc;
+function online(options,callback1 =function(){},callback2=function(){}){
     var noti = document.createElement('div');
     noti.setAttribute('id','snackbar');
-    noti.innerHTML = `Hello`;
     document.body.appendChild(noti)
  var style = document.createElement('style');
  style.innerHTML = `
@@ -20,7 +27,6 @@ function online(callback1 =function(){},callback2=function(){}){
     position: fixed;
     z-index: 1;
     left: 50%;
-    bottom: 30px;
     font-size: 17px;
   }
   
@@ -68,7 +74,49 @@ function online(callback1 =function(){},callback2=function(){}){
   }
  `
  document.head.appendChild(style);
+ 
  var notificationHtml = document.getElementById('snackbar');
+ Object.keys(options).forEach((item)=>{
+    console.log(item)
+    if(item == 'backgroundColorOff'){
+        backgroundColorOff = options[item];  
+   }
+   else if(item == 'backgroundColorOnn'){
+    backgroundColorOnn  = options[item];
+   }
+   else if(item == 'spinner'){
+     if(options[item] == 'circle'){
+         spinnersrc = circleSrc
+     }
+     else if(options[item] == 'fidget'){
+     spinnersrc = fidgetSrc;
+   }
+   else if(options[item].includes('png') || options[item].includes('jpeg')){
+     spinnersrc = options[item];
+   }
+   else{
+    spinnersrc = defSrc;
+    }
+ }
+ else if(item == 'msgOff'){
+   msgOff  = options[item];
+ }
+ else if(item == 'msgOnn'){
+     msgOnn = options[item];
+ }
+ else if(item == 'msgCheck'){
+  msgCheck = options[item];
+ }
+ else if(item == 'position'){
+   if(options[item] == 'top-right'){
+     notificationHtml.style.left = '8%';
+     notificationHtml.style.top = '5%'
+   }
+   else{
+      // 
+   }
+ }
+})
  var interval = setInterval(function(){
      if(navigator.onLine){
          if(hasClass(notificationHtml,'connected')){
@@ -77,18 +125,21 @@ function online(callback1 =function(){},callback2=function(){}){
          }
          else{
              if(hasClass(notificationHtml,'show')){
-                 notificationHtml.innerHTML = '<p><img src="'+verifiedsrc+'" height="23px" >&nbsp;&nbsp;&nbsp;&nbsp;Connected</p>'
-                notificationHtml.className = 'connected';
+                 notificationHtml.innerHTML = '<p><img src="'+verifiedsrc+'" height="23px" >&nbsp;&nbsp;&nbsp;&nbsp;"'+msgOnn+'"</p>'
+                 notificationHtml.style.backgroundColor = backgroundColorOnn;
+                 notificationHtml.className = 'connected';
              }
          }
      }
      else{
          if(hasClass(notificationHtml,'show')){
-            notificationHtml.innerHTML = '<p><img src="'+spinnersrc+'"  id="spinner" >&nbsp;&nbsp;&nbsp;&nbsp;Checking....</p>';
+            notificationHtml.innerHTML = '<p><img src="'+spinnersrc+'"  id="spinner" >&nbsp;&nbsp;&nbsp;&nbsp;'+msgCheck+'</p>';
+            notificationHtml.style.backgroundColor = backgroundColorOff;
          }
          else{
-            notificationHtml.innerHTML = 'Internet is not Connected';
+            notificationHtml.innerHTML = msgOff;
             notificationHtml.className = 'show';
+            notificationHtml.style.backgroundColor = backgroundColorOff;
             callback2(); 
          }
      }
