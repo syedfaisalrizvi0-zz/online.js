@@ -1,5 +1,5 @@
 # online.js
-an library with zero Dependencies to controll when user lost the internet connection and get back it 
+An library with zero Dependencies to controll when user lost the internet connection and get back it 
 
 1) Library has  separate callback function for when user lost connection and when got back it
 
