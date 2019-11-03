@@ -1,3 +1,4 @@
+//https://github.com/syedfaisalrizvi0/online.js
 var spinnersrc;
 var backgroundColorOff ='red';
 var backgroundColorOnn ='green';
