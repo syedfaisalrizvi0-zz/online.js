@@ -90,7 +90,6 @@ function online(options,callback1 =function(){},callback2=function(){}){
  
  var notificationHtml = document.getElementById('snackbar');
  Object.keys(options).forEach((item)=>{
-    console.log(item)
     if(item == 'backgroundColorOff'){
         backgroundColorOff = options[item];  
    }
